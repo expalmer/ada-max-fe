@@ -3,8 +3,9 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const SignIn = () => {
-  const auth = useAuth();
+  const { data, signIn, isLoading, error } = useAuth();
   const navigate = useNavigate();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -14,16 +15,15 @@ export const SignIn = () => {
     };
 
     if (email.value && password.value) {
-      auth.signIn();
+      signIn(email.value, password.value);
     }
   };
 
   useEffect(() => {
-    if (auth.data) {
-      console.log("signed");
+    if (data) {
       return navigate("/profile");
     }
-  }, [auth.data, navigate]);
+  }, [data, navigate]);
 
   return (
     <>
@@ -38,6 +38,8 @@ export const SignIn = () => {
         <p>
           <button type="submit">Sign In</button>
         </p>
+        {error && <p>{error}</p>}
+        {isLoading && <p>Loading...</p>}
       </form>
     </>
   );

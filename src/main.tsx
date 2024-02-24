@@ -1,3 +1,4 @@
+import "./reset.css";
 import "./index.css";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
@@ -7,7 +8,8 @@ import { BackstageBanners } from "./modules/backstage/backstage-banners";
 import { BackstageOffers } from "./modules/backstage/backstage-offers";
 import { ErrorPage } from "./components/error-page";
 import { Home } from "./modules/home";
-import { Profile } from "./modules/profile";
+import { Profile } from "./modules/profile/profile";
+import { ProfileCreate } from "./modules/profile/profile-create";
 import { ProtectedRoute } from "./components/protected-route";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -36,6 +38,11 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/profile/create",
+    element: <ProfileCreate />,
     errorElement: <ErrorPage />,
   },
   {
